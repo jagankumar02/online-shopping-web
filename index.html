@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NEXORA | Premium Online Shopping</title>
+    <!-- Google Fonts & Font Awesome Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+    <!-- Announcement Bar -->
+    <aside class="announcement-bar" id="announcementBar">
+        <div class="announcement-content">
+            <span><i class="fa-solid fa-bolt"></i> FESTIVE SALE: Extra 20% OFF with code <strong>FESTIVE20</strong> |
+                Free Express Shipping over ₹999</span>
+        </div>
+        <button class="close-announcement" id="closeAnnouncement" aria-label="Close Announcement">&times;</button>
+    </aside>
+
+    <!-- Top Utility Header -->
+    <header class="main-header" id="mainHeader">
+        <div class="header-container">
+            <!-- Logo -->
+            <a href="#" class="brand-logo" id="brandLogo">
+                <span class="logo-mark">N</span>EXORA<span class="logo-dot">.</span>
+            </a>
+
+            <!-- Search Bar with Instant Auto-Complete -->
+            <div class="search-wrapper">
+                <form class="search-bar" id="searchForm" onsubmit="return false;">
+                    <select id="searchCategorySelect" class="search-category-select">
+                        <option value="all">All Categories</option>
+                        <option value="Electronics & Gadgets">Electronics</option>
+                        <option value="Fashion & Clothing">Fashion</option>
+                        <option value="Shoes & Sneakers">Shoes</option>
+                        <option value="Home & Kitchen">Home</option>
+                        <option value="Beauty & Personal Care">Beauty</option>
+                        <option value="Books & Stationery">Books</option>
+                        <option value="Sports & Fitness">Sports</option>
+                        <option value="Accessories">Accessories</option>
+                    </select>
+                    <div class="search-input-group">
+                        <input type="text" id="searchInput" placeholder="Search for products, brands, or categories..."
+                            autocomplete="off" />
+                        <button type="button" class="clear-search-btn hide" id="clearSearchBtn">&times;</button>
+                    </div>
+                    <button type="submit" class="search-btn" id="searchSubmitBtn">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </form>
+                <!-- Auto-complete Suggestions Dropdown -->
+                <div class="search-suggestions" id="searchSuggestions"></div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="header-actions">
+                <!-- Theme Toggle -->
+                <button class="action-btn theme-toggle" id="themeToggleBtn" title="Toggle Dark/Light Mode">
+                    <i class="fa-regular fa-moon" id="themeIcon"></i>
+                </button>
+
+                <!-- Wishlist -->
+                <button class="action-btn" id="headerWishlistBtn" title="Wishlist">
+                    <i class="fa-regular fa-heart"></i>
+                    <span class="action-label">Wishlist</span>
+                    <span class="badge" id="wishlistBadge">0</span>
+                </button>
+
+                <!-- Cart Drawer Button -->
+                <button class="action-btn" id="headerCartBtn" title="Cart">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="action-label">Cart</span>
+                    <span class="badge badge-accent" id="cartBadge">0</span>
+                </button>
+
+                <!-- Account Button -->
+                <button class="action-btn" id="headerAccountBtn" title="Account">
+                    <i class="fa-regular fa-user"></i>
+                    <span class="action-label" id="accountLabel">Account</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Category Navigation Menu -->
+        <nav class="category-nav">
+            <div class="nav-container">
+                <ul class="nav-links" id="categoryNavLinks">
+                    <li><a href="#" class="nav-item active" data-category="all"><i class="fa-solid fa-border-all"></i>
+                            All Products</a></li>
+                    <li><a href="#" class="nav-item" data-category="Electronics & Gadgets">Electronics</a></li>
+                    <li><a href="#" class="nav-item" data-category="Fashion & Clothing">Fashion</a></li>
+                    <li><a href="#" class="nav-item" data-category="Shoes & Sneakers">Shoes</a></li>
+                    <li><a href="#" class="nav-item" data-category="Home & Kitchen">Home & Kitchen</a></li>
+                    <li><a href="#" class="nav-item" data-category="Beauty & Personal Care">Beauty</a></li>
+                    <li><a href="#" class="nav-item" data-category="Books & Stationery">Books</a></li>
+                    <li><a href="#" class="nav-item" data-category="Sports & Fitness">Sports</a></li>
+                    <li><a href="#" class="nav-item" data-category="Accessories">Accessories</a></li>
+                </ul>
+                <button class="compare-nav-btn" id="compareDrawerTrigger">
+                    <i class="fa-solid fa-scale-balanced"></i> Compare (<span id="compareCount">0</span>)
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Dynamic View Container -->
+    <main class="main-content" id="mainContent">
+
+        <!-- HERO PROMOTIONAL BANNER SECTION -->
+        <section class="hero-section" id="heroSection">
+            <div class="hero-slider">
+                <div class="hero-slide active">
+                    <div class="hero-content">
+                        <span class="hero-tag">NEW COLLECTION 2026</span>
+                        <h1 class="hero-title">Elevate Your Everyday Lifestyle</h1>
+                        <p class="hero-desc">Discover curated tech, minimalist fashion, and modern home essentials with
+                            instant pan-India delivery.</p>
+                        <div class="hero-cta-group">
+                            <button class="btn btn-primary" onclick="scrollToCatalog()">Shop Catalog <i
+                                    class="fa-solid fa-arrow-right"></i></button>
+                            <button class="btn btn-secondary" onclick="filterByTag('Trending')">View Trending</button>
+                        </div>
+                    </div>
+                    <div class="hero-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1000&q=80"
+                            alt="Audio Headset" class="hero-img"
+                            onerror="this.src='https://placehold.co/800x600/f4f3ef/111111?text=NEXORA+Collection'" />
+                        <div class="hero-badge">
+                            <span>Up to 45% Off</span>
+                            <small>Limited stock deals</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FLASH DEALS BAR -->
+        <section class="flash-deals-banner">
+            <div class="flash-deal-info">
+                <div class="flash-title"><i class="fa-solid fa-fire icon-flash"></i> FLASH DEALS OF THE DAY</div>
+                <div class="flash-timer" id="flashTimer">
+                    Ends in: <span id="timerHours">08</span>h : <span id="timerMins">42</span>m : <span
+                        id="timerSecs">15</span>s
+                </div>
+            </div>
+            <div class="flash-perks">
+                <span><i class="fa-solid fa-truck-fast"></i> Free Shipping Over ₹999</span>
+                <span><i class="fa-solid fa-rotate-left"></i> 7 Days Easy Return</span>
+                <span><i class="fa-solid fa-shield-halved"></i> 100% Genuine Products</span>
+            </div>
+        </section>
+
+        <!-- CATALOG & SEARCH RESULTS SECTION -->
+        <section class="catalog-section" id="catalogSection">
+            <div class="catalog-header">
+                <div class="catalog-title-wrap">
+                    <h2 class="section-title" id="catalogTitle">Explore Products</h2>
+                    <span class="results-count" id="resultsCount">Showing 24 products</span>
+                </div>
+
+                <!-- Sorting and Filter Mobile Toggle -->
+                <div class="catalog-controls">
+                    <button class="btn btn-outline mobile-filter-btn" id="mobileFilterToggle">
+                        <i class="fa-solid fa-sliders"></i> Filters
+                    </button>
+
+                    <div class="sort-wrapper">
+                        <label for="sortBySelect">Sort By:</label>
+                        <select id="sortBySelect" class="sort-select">
+                            <option value="popularity">Popularity</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                            <option value="rating">Highest Rated</option>
+                            <option value="newest">New Arrivals</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Active Filter Tags Display -->
+            <div class="active-filters-bar hide" id="activeFiltersBar">
+                <span class="active-filters-label">Active Filters:</span>
+                <div class="filter-chips" id="filterChips"></div>
+                <button class="btn-text clear-all-btn" id="clearAllFiltersBtn">Clear All</button>
+            </div>
+
+            <!-- Main Layout Grid: Sidebar Filters + Products Grid -->
+            <div class="catalog-layout">
+
+                <!-- SIDEBAR FILTERS -->
+                <aside class="filters-sidebar" id="filtersSidebar">
+                    <div class="sidebar-header">
+                        <h3>Filter Products</h3>
+                        <button class="close-sidebar-btn" id="closeSidebarBtn">&times;</button>
+                    </div>
+
+                    <!-- Category Filter -->
+                    <div class="filter-group">
+                        <h4 class="filter-title">Categories</h4>
+                        <div class="filter-options category-list" id="categoryFilterList">
+                            <!-- Rendered via JS -->
+                        </div>
+                    </div>
+
+                    <!-- Price Range Filter -->
+                    <div class="filter-group">
+                        <h4 class="filter-title">Price Range</h4>
+                        <div class="price-slider-wrap">
+                            <div class="price-inputs">
+                                <div class="price-field">
+                                    <span>₹</span>
+                                    <input type="number" id="minPriceInput" value="0" min="0" max="100000" />
+                                </div>
+                                <span>to</span>
+                                <div class="price-field">
+                                    <span>₹</span>
+                                    <input type="number" id="maxPriceInput" value="100000" min="0" max="100000" />
+                                </div>
+                            </div>
+                            <input type="range" id="priceRangeSlider" min="0" max="100000" step="500" value="100000" />
+                        </div>
+                    </div>
+
+                    <!-- Rating Filter -->
+                    <div class="filter-group">
+                        <h4 class="filter-title">Minimum Rating</h4>
+                        <div class="filter-options rating-options">
+                            <label class="radio-label">
+                                <input type="radio" name="ratingFilter" value="0" checked />
+                                <span>All Ratings</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="ratingFilter" value="4" />
+                                <span><i class="fa-solid fa-star star-filled"></i> 4.0 & above</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="ratingFilter" value="4.5" />
+                                <span><i class="fa-solid fa-star star-filled"></i> 4.5 & above</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Availability Filter -->
+                    <div class="filter-group">
+                        <h4 class="filter-title">Availability</h4>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="inStockCheckbox" />
+                            <span>Exclude Out of Stock</span>
+                        </label>
+                    </div>
+
+                    <!-- Reset Filter Button -->
+                    <button class="btn btn-outline full-width" id="resetFiltersBtn">
+                        <i class="fa-solid fa-rotate-left"></i> Reset All Filters
+                    </button>
+                </aside>
+
+                <!-- PRODUCT GRID & EMPTY STATE -->
+                <div class="product-grid-container">
+                    <div class="product-grid" id="productGrid">
+                        <!-- Dynamic Cards Populated by JS -->
+                    </div>
+
+                    <!-- Empty Search/Filter State -->
+                    <div class="empty-state hide" id="emptyState">
+                        <div class="empty-icon"><i class="fa-solid fa-magnifying-glass-minus"></i></div>
+                        <h3>No products found</h3>
+                        <p>Try adjusting your search terms or relaxing your filter criteria.</p>
+                        <button class="btn btn-primary" onclick="resetAllFilters()">Reset All Filters</button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- RECENTLY VIEWED SECTION -->
+        <section class="recently-viewed-section hide" id="recentlyViewedSection">
+            <h2 class="section-title">Recently Viewed</h2>
+            <div class="horizontal-scroll-grid" id="recentlyViewedGrid">
+                <!-- JS Populated -->
+            </div>
+        </section>
+
+        <!-- NEWSLETTER SIGNUP SECTION -->
+        <section class="newsletter-section">
+            <div class="newsletter-card">
+                <div class="newsletter-text">
+                    <span class="badge-tag">JOIN THE CLUB</span>
+                    <h2>Subscribe to NEXORA Insider</h2>
+                    <p>Get exclusive early access to flash sales, new drops, and ₹500 off your first purchase.</p>
+                </div>
+                <form class="newsletter-form" id="newsletterForm" onsubmit="return false;">
+                    <div class="input-with-button">
+                        <input type="email" id="newsletterEmail" placeholder="Enter your email address" required />
+                        <button type="submit" class="btn btn-accent">Subscribe</button>
+                    </div>
+                    <span class="newsletter-disclaimer"><i class="fa-solid fa-lock"></i> No spam. Unsubscribe
+                        anytime.</span>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-col brand-col">
+                <a href="#" class="brand-logo footer-logo">
+                    <span class="logo-mark">N</span>EXORA<span class="logo-dot">.</span>
+                </a>
+                <p class="footer-desc">India's modern destination for curated fashion, next-gen electronics, home
+                    aesthetics, and elevated everyday living.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4>Shop Categories</h4>
+                <ul>
+                    <li><a href="#" onclick="filterByCategory('Electronics & Gadgets')">Electronics</a></li>
+                    <li><a href="#" onclick="filterByCategory('Fashion & Clothing')">Fashion Apparel</a></li>
+                    <li><a href="#" onclick="filterByCategory('Shoes & Sneakers')">Footwear & Sneakers</a></li>
+                    <li><a href="#" onclick="filterByCategory('Home & Kitchen')">Home Essentials</a></li>
+                    <li><a href="#" onclick="filterByCategory('Beauty & Personal Care')">Beauty & Skincare</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Customer Care</h4>
+                <ul>
+                    <li><a href="#"
+                            onclick="openDemoModal('Track Order', 'Enter order ID in your Account panel to check live status.')">Track
+                            Your Order</a></li>
+                    <li><a href="#"
+                            onclick="openDemoModal('Shipping Policy', 'Free delivery on orders above ₹999 across all pincodes in India.')">Shipping
+                            & Delivery</a></li>
+                    <li><a href="#"
+                            onclick="openDemoModal('Returns', 'Hassle-free 7-day pickup & replacement policy.')">Return
+                            & Refund Policy</a></li>
+                    <li><a href="#"
+                            onclick="openDemoModal('Help Center', 'Need assistance? Reach our 24/7 team at support@nexora-demo.com')">Help
+                            & Support</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4> System Controls</h4>
+                <p class="demo-info-text">NEXORA is a frontend educational store simulation. Data is stored safely in
+                    your browser local storage.</p>
+                <button class="btn btn-outline-danger btn-sm" id="resetDemoDataBtn">
+                    <i class="fa-solid fa-trash-can"></i> Reset Data
+                </button>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-bottom-container">
+                <p>&copy; 2026 NEXORA Retail Inc. Built for educational portfolio  purposes.</p>
+                <div class="payment-badges">
+                    <span class="pay-badge"><i class="fa-brands fa-google-pay"></i> UPI</span>
+                    <span class="pay-badge"><i class="fa-regular fa-credit-card"></i> Visa / Mastercard</span>
+                    <span class="pay-badge"><i class="fa-solid fa-money-bill-transfer"></i> COD</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MOBILE BOTTOM NAVIGATION BAR -->
+    <nav class="mobile-bottom-nav">
+        <button class="mobile-nav-item active" id="mobileNavHome" onclick="navigateTo('home')">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+        </button>
+        <button class="mobile-nav-item" id="mobileNavCategories" onclick="toggleMobileSidebar()">
+            <i class="fa-solid fa-grip"></i>
+            <span>Filter</span>
+        </button>
+        <button class="mobile-nav-item" id="mobileNavWishlist" onclick="navigateTo('wishlist')">
+            <i class="fa-regular fa-heart"></i>
+            <span class="mobile-badge" id="mobileWishlistBadge">0</span>
+            <span>Wishlist</span>
+        </button>
+        <button class="mobile-nav-item" id="mobileNavCart" onclick="openCartDrawer()">
+            <i class="fa-solid fa-bag-shopping"></i>
+            <span class="mobile-badge" id="mobileCartBadge">0</span>
+            <span>Cart</span>
+        </button>
+        <button class="mobile-nav-item" id="mobileNavAccount" onclick="navigateTo('account')">
+            <i class="fa-regular fa-user"></i>
+            <span>Account</span>
+        </button>
+    </nav>
+
+    <!-- ==================== MODALS & DRAWERS ==================== -->
+
+    <!-- PRODUCT DETAIL MODAL -->
+    <div class="modal-backdrop hide" id="productDetailModal">
+        <div class="modal-card modal-lg">
+            <button class="modal-close-btn" onclick="closeModal('productDetailModal')">&times;</button>
+            <div class="product-detail-body" id="productDetailBody">
+                <!-- Dynamic content injected by script -->
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE-OUT CART DRAWER -->
+    <div class="drawer-backdrop hide" id="cartDrawerBackdrop">
+        <div class="cart-drawer" id="cartDrawer">
+            <div class="drawer-header">
+                <h3><i class="fa-solid fa-bag-shopping"></i> Your Shopping Bag (<span id="cartDrawerCount">0</span>)
+                </h3>
+                <button class="close-drawer-btn" onclick="closeCartDrawer()">&times;</button>
+            </div>
+
+            <div class="drawer-body" id="cartDrawerItems">
+                <!-- Rendered cart items or empty state -->
+            </div>
+
+            <div class="drawer-footer hide" id="cartDrawerFooter">
+                <!-- Promo Coupon Input -->
+                <div class="coupon-section">
+                    <div class="coupon-input-group">
+                        <input type="text" id="couponInput" placeholder="Promo code (e.g. NEXORA10)"
+                            style="text-transform:uppercase" />
+                        <button class="btn btn-outline-dark" id="applyCouponBtn">Apply</button>
+                    </div>
+                    <div class="coupon-message" id="couponMessage"></div>
+                </div>
+
+                <!-- Order Summary Breakdown -->
+                <div class="cart-summary-breakdown">
+                    <div class="summary-row">
+                        <span>Subtotal</span>
+                        <span id="cartSubtotalVal">₹0</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Estimated Shipping</span>
+                        <span id="cartShippingVal">₹0</span>
+                    </div>
+                    <div class="summary-row discount-row hide" id="couponDiscountRow">
+                        <span>Coupon Discount</span>
+                        <span id="cartDiscountVal">-₹0</span>
+                    </div>
+                    <div class="summary-row grand-total">
+                        <span>Total Amount</span>
+                        <span id="cartGrandTotalVal">₹0</span>
+                    </div>
+                </div>
+
+                <div class="drawer-action-btns">
+                    <button class="btn btn-primary full-width" id="proceedToCheckoutBtn">
+                        Proceed to Checkout <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                    <button class="btn btn-link full-width" onclick="closeCartDrawer()">Continue Shopping</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PRODUCT COMPARISON DRAWER -->
+    <div class="drawer-backdrop hide" id="compareDrawerBackdrop">
+        <div class="modal-card modal-lg">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-scale-balanced"></i> Compare Products</h3>
+                <button class="modal-close-btn" onclick="closeModal('compareDrawerBackdrop')">&times;</button>
+            </div>
+            <div class="compare-body" id="compareBody">
+                <!-- JS Rendered Comparison Table -->
+            </div>
+        </div>
+    </div>
+
+    <!-- AUTHENTICATION (LOGIN / SIGNUP) MODAL -->
+    <div class="modal-backdrop hide" id="authModal">
+        <div class="modal-card modal-sm">
+            <button class="modal-close-btn" onclick="closeModal('authModal')">&times;</button>
+
+            <!-- Demo Notice Banner -->
+            <div class="demo-warning-banner">
+                <i class="fa-solid fa-circle-info"></i> STORE: Simulated session. Do use real passwords.
+            </div>
+
+            <div class="auth-tabs">
+                <button class="auth-tab-btn active" id="loginTabBtn" onclick="switchAuthTab('login')">Sign In</button>
+                <button class="auth-tab-btn" id="signupTabBtn" onclick="switchAuthTab('signup')">Create Account</button>
+            </div>
+
+            <!-- Login Form -->
+            <form class="auth-form" id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="loginEmail">Email Address</label>
+                    <input type="email" id="loginEmail" placeholder="demo@nexora.com" required
+                        value="customer@nexora.com" />
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <div class="password-field">
+                        <input type="password" id="loginPassword" placeholder="••••••••" required value="demo1234" />
+                        <button type="button" class="toggle-pwd-btn"
+                            onclick="togglePasswordVisibility('loginPassword')"><i
+                                class="fa-regular fa-eye"></i></button>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary full-width">Sign In</button>
+            </form>
+
+            <!-- Signup Form -->
+            <form class="auth-form hide" id="signupForm" onsubmit="handleSignup(event)">
+                <div class="form-group">
+                    <label for="signupName">Full Name</label>
+                    <input type="text" id="signupName" placeholder="e.g. Priya Sharma" required />
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email Address</label>
+                    <input type="email" id="signupEmail" placeholder="name@example.com" required />
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <div class="password-field">
+                        <input type="password" id="signupPassword" placeholder="Min 6 characters" required
+                            minlength="6" />
+                        <button type="button" class="toggle-pwd-btn"
+                            onclick="togglePasswordVisibility('signupPassword')"><i
+                                class="fa-regular fa-eye"></i></button>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-accent full-width">Create  Account</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MULTI-STEP CHECKOUT MODAL -->
+    <div class="modal-backdrop hide" id="checkoutModal">
+        <div class="modal-card modal-xl">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-shield-halved"></i> Secure  Checkout</h3>
+                <button class="modal-close-btn" onclick="closeModal('checkoutModal')">&times;</button>
+            </div>
+
+            <div class="checkout-steps-indicator">
+                <div class="step-item active" id="stepInd1"><span class="step-num">1</span> Shipping Address</div>
+                <div class="step-item" id="stepInd2"><span class="step-num">2</span> Order Review</div>
+                <div class="step-item" id="stepInd3"><span class="step-num">3</span> Payment</div>
+            </div>
+
+            <div class="checkout-body">
+
+                <!-- STEP 1: ADDRESS -->
+                <div class="checkout-step-panel" id="checkoutStep1">
+                    <h4 class="step-heading">Delivery Address</h4>
+                    <form id="checkoutAddressForm" onsubmit="handleAddressSubmit(event)">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="shipName">Full Name *</label>
+                                <input type="text" id="shipName" placeholder="Recipient's Name" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="shipPhone">Phone Number *</label>
+                                <input type="tel" id="shipPhone" placeholder="10-digit mobile number"
+                                    pattern="[0-9]{10}" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="shipPincode">PIN Code *</label>
+                                <input type="text" id="shipPincode" placeholder="6-digit PIN code" pattern="[0-9]{6}"
+                                    required />
+                            </div>
+                            <div class="form-group">
+                                <label for="shipCity">City / District *</label>
+                                <input type="text" id="shipCity" placeholder="City" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="shipState">State *</label>
+                                <input type="text" id="shipState" placeholder="State" required />
+                            </div>
+                            <div class="form-group full-width-field">
+                                <label for="shipStreet">House No., Street Address, Area *</label>
+                                <input type="text" id="shipStreet" placeholder="Flat / Building Name / Street"
+                                    required />
+                            </div>
+                        </div>
+                        <div class="checkout-actions">
+                            <button type="button" class="btn btn-outline"
+                                onclick="closeModal('checkoutModal')">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Continue to Review <i
+                                    class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- STEP 2: REVIEW -->
+                <div class="checkout-step-panel hide" id="checkoutStep2">
+                    <h4 class="step-heading">Review Order Items & Cost</h4>
+                    <div class="review-layout">
+                        <div class="review-items-list" id="checkoutReviewItems">
+                            <!-- Rendered items -->
+                        </div>
+                        <div class="review-summary-card">
+                            <h4>Order Summary</h4>
+                            <div id="checkoutSummaryDetails">
+                                <!-- JS calculated totals -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="checkout-actions">
+                        <button type="button" class="btn btn-outline" onclick="goToCheckoutStep(1)"><i
+                                class="fa-solid fa-arrow-left"></i> Back</button>
+                        <button type="button" class="btn btn-primary" onclick="goToCheckoutStep(3)">Proceed to Payment
+                            <i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+                </div>
+
+                <!-- STEP 3: PAYMENT -->
+                <div class="checkout-step-panel hide" id="checkoutStep3">
+                    <div class="demo-payment-alert">
+                        <i class="fa-solid fa-triangle-exclamation"></i> <strong>PAYMENT SYSTEM</strong> — No real
+                        money will be charged.
+                    </div>
+
+                    <div class="payment-methods-grid">
+                        <!-- Payment Nav Tabs -->
+                        <div class="payment-tabs">
+                            <button class="pay-tab active" data-pay="upi" onclick="switchPayTab('upi')"><i
+                                    class="fa-solid fa-qrcode"></i> UPI / QR</button>
+                            <button class="pay-tab" data-pay="card" onclick="switchPayTab('card')"><i
+                                    class="fa-regular fa-credit-card"></i> Card</button>
+                            <button class="pay-tab" data-pay="cod" onclick="switchPayTab('cod')"><i
+                                    class="fa-solid fa-hand-holding-dollar"></i> Cash on Delivery</button>
+                        </div>
+
+                        <!-- Payment Details Box -->
+                        <div class="payment-tab-content">
+
+                            <!-- UPI Option -->
+                            <div class="pay-panel" id="payPanelUpi">
+                                <div class="upi-demo-wrapper">
+                                    <div class="qr-placeholder">
+                                        <i class="fa-solid fa-qrcode qr-icon"></i>
+                                        <span>Scan Demo QR with any UPI App</span>
+                                    </div>
+                                    <div class="upi-input-block">
+                                        <label>Or enter VPA ID:</label>
+                                        <input type="text" value="nexora.demo@paytm" readonly />
+                                    </div>
+                                </div>
+                                <div class="demo-trigger-buttons">
+                                    <button type="button" class="btn btn-success full-width"
+                                        onclick="processDemoPayment('UPI', 'SUCCESS')">
+                                        <i class="fa-solid fa-circle-check"></i> Simulate Successful Payment (₹<span
+                                            class="payTotalSpan">0</span>)
+                                    </button>
+                                    <button type="button" class="btn btn-danger-soft full-width"
+                                        onclick="processDemoPayment('UPI', 'FAIL')">
+                                        <i class="fa-solid fa-circle-xmark"></i> Simulate Failed Payment
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Card Option -->
+                            <div class="pay-panel hide" id="payPanelCard">
+                                <form onsubmit="return false;">
+                                    <div class="form-group">
+                                        <label>Card Number (Demo Test)</label>
+                                        <input type="text" placeholder="4532 •••• •••• 8892"
+                                            value="4532 0000 0000 8892" />
+                                    </div>
+                                    <div class="form-grid">
+                                        <div class="form-group">
+                                            <label>Expiry Date</label>
+                                            <input type="text" placeholder="MM/YY" value="12/28" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>CVV</label>
+                                            <input type="password" placeholder="123" value="123" maxlength="3" />
+                                        </div>
+                                    </div>
+                                </form>
+                                <div class="demo-trigger-buttons">
+                                    <button type="button" class="btn btn-success full-width"
+                                        onclick="processDemoPayment('CARD', 'SUCCESS')">
+                                        <i class="fa-solid fa-lock"></i> Pay & Complete Order (₹<span
+                                            class="payTotalSpan">0</span>)
+                                    </button>
+                                    <button type="button" class="btn btn-danger-soft full-width"
+                                        onclick="processDemoPayment('CARD', 'FAIL')">
+                                        <i class="fa-solid fa-circle-xmark"></i> Simulate Card Payment
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- COD Option -->
+                            <div class="pay-panel hide" id="payPanelCod">
+                                <div class="cod-info-box">
+                                    <i class="fa-solid fa-truck-ramp-box icon-lg"></i>
+                                    <h4>Pay Cash / UPI upon delivery</h4>
+                                    <p>You can pay via Cash or UPI QR to the delivery agent when your package arrives.
+                                    </p>
+                                </div>
+                                <button type="button" class="btn btn-primary full-width"
+                                    onclick="processDemoPayment('COD', 'SUCCESS')">
+                                    Place Order with COD
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="checkout-actions">
+                        <button type="button" class="btn btn-outline" onclick="goToCheckoutStep(2)"><i
+                                class="fa-solid fa-arrow-left"></i> Back to Review</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- ORDER SUCCESS / CONFIRMATION MODAL -->
+    <div class="modal-backdrop hide" id="orderSuccessModal">
+        <div class="modal-card modal-md text-center">
+            <div class="success-animation">
+                <i class="fa-solid fa-circle-check icon-success"></i>
+            </div>
+            <h2>Order Placed Successfully!</h2>
+            <p class="order-id-display">Order ID: <strong id="successOrderId">NEX-000000</strong></p>
+            <p class="success-desc">Thank you for your  purchase. You can view progress in your Order History.</p>
+
+            <div class="order-summary-box" id="successOrderSummary">
+                <!-- JS filled -->
+            </div>
+
+            <div class="modal-footer-btns">
+                <button class="btn btn-primary" onclick="closeModal('orderSuccessModal'); navigateTo('account');">View
+                    Order History</button>
+                <button class="btn btn-outline" onclick="closeModal('orderSuccessModal');">Continue Shopping</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- USER ACCOUNT / ORDERS VIEW MODAL -->
+    <div class="modal-backdrop hide" id="accountModal">
+        <div class="modal-card modal-lg">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-user-gear"></i> Account Center</h3>
+                <button class="modal-close-btn" onclick="closeModal('accountModal')">&times;</button>
+            </div>
+            <div class="account-layout">
+                <div class="account-sidebar">
+                    <div class="user-profile-badge">
+                        <div class="avatar-circle" id="userAvatar">U</div>
+                        <div class="user-info">
+                            <h4 id="userNameDisplay">Guest User</h4>
+                            <span id="userEmailDisplay">Not signed in</span>
+                        </div>
+                    </div>
+                    <nav class="account-nav-tabs">
+                        <button class="acc-tab active" data-tab="orders" onclick="switchAccountTab('orders')"><i
+                                class="fa-solid fa-box"></i> Order History</button>
+                        <button class="acc-tab" data-tab="addresses" onclick="switchAccountTab('addresses')"><i
+                                class="fa-solid fa-location-dot"></i> Saved Addresses</button>
+                        <button class="acc-tab" data-tab="settings" onclick="switchAccountTab('settings')"><i
+                                class="fa-solid fa-sliders"></i> Preferences</button>
+                    </nav>
+                    <button class="btn btn-outline-danger full-width btn-sm" onclick="handleLogout()"><i
+                            class="fa-solid fa-right-from-bracket"></i> Sign Out</button>
+                </div>
+
+                <div class="account-main-content">
+                    <!-- Orders Tab -->
+                    <div class="acc-panel" id="accPanelOrders">
+                        <h4>Your Orders & Tracking</h4>
+                        <div class="orders-list" id="ordersListContainer">
+                            <!-- Rendered orders list -->
+                        </div>
+                    </div>
+
+                    <!-- Addresses Tab -->
+                    <div class="acc-panel hide" id="accPanelAddresses">
+                        <h4>Saved Addresses</h4>
+                        <div class="addresses-grid" id="savedAddressesGrid">
+                            <!-- Rendered addresses -->
+                        </div>
+                    </div>
+
+                    <!-- Settings Tab -->
+                    <div class="acc-panel hide" id="accPanelSettings">
+                        <h4>Store Preferences</h4>
+                        <div class="setting-item">
+                            <span>Theme Mode</span>
+                            <button class="btn btn-outline btn-sm" onclick="toggleTheme()">Switch Light/Dark</button>
+                        </div>
+                        <div class="setting-item danger-zone">
+                            <div>
+                                <strong>Clear Local Storage Data</strong>
+                                <p>Wipe all stored orders, cart items, wishlist, and session data.</p>
+                            </div>
+                            <button class="btn btn-danger-soft btn-sm" onclick="confirmResetData()">Reset Store
+                                Data</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- WISHLIST VIEW MODAL -->
+    <div class="modal-backdrop hide" id="wishlistModal">
+        <div class="modal-card modal-lg">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-heart text-accent"></i> My Saved Wishlist</h3>
+                <button class="modal-close-btn" onclick="closeModal('wishlistModal')">&times;</button>
+            </div>
+            <div class="wishlist-body" id="wishlistGrid">
+                <!-- Rendered Wishlist Products -->
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATIONS CONTAINER -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Script Embed -->
+    <script src="script.js"></script>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a53d547799f1fda8',t:'MTc5MzU2MTU5Mw=='};var l=window.parent.location,o;try{o=new URL(l.origin).origin}catch(e){try{o=new URL(new URL(l.href).origin).origin}catch(e){o=''}}var u='/cdn-cgi/challenge-platform/scripts/jsd/main.js?ray=a53d547799f1fda8',a=document.createElement('script');a.src=o?new URL(u,o).href:u;document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+
+</html>
